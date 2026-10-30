@@ -1,0 +1,1662 @@
+{
+  "info": {
+    "name": "queue-management-system-midterm",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Step 0 - seed data",
+      "item": [
+        {
+          "name": "Seed - service type Bill Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-types/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-types",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bill Payment\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/service-types/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        var names = {'Bill Payment': 'st1', 'Account Opening': 'st2', 'Complaints': 'st3', 'Loan Enquiry': 'st4'};",
+                  "        pm.environment.set(names[x.name], x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - service type Account Opening",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-types/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-types",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Account Opening\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/service-types/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        var names = {'Bill Payment': 'st1', 'Account Opening': 'st2', 'Complaints': 'st3', 'Loan Enquiry': 'st4'};",
+                  "        pm.environment.set(names[x.name], x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - service type Complaints",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-types/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-types",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Complaints\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/service-types/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        var names = {'Bill Payment': 'st1', 'Account Opening': 'st2', 'Complaints': 'st3', 'Loan Enquiry': 'st4'};",
+                  "        pm.environment.set(names[x.name], x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - service type Loan Enquiry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-types/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-types",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Loan Enquiry\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/service-types/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        var names = {'Bill Payment': 'st1', 'Account Opening': 'st2', 'Complaints': 'st3', 'Loan Enquiry': 'st4'};",
+                  "        pm.environment.set(names[x.name], x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - counter 1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"counterNumber\": 1,\n  \"name\": \"Counter 1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/counters/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('counter' + x.counterNumber, x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - counter 2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"counterNumber\": 2,\n  \"name\": \"Counter 2\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/counters/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('counter' + x.counterNumber, x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - counter 3",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"counterNumber\": 3,\n  \"name\": \"Counter 3\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/counters/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('counter' + x.counterNumber, x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - counter 4",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"counterNumber\": 4,\n  \"name\": \"Counter 4\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/counters/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('counter' + x.counterNumber, x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - agent Jean",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Jean\",\n  \"lastName\": \"Habimana\",\n  \"badgeNumber\": \"B-001\",\n  \"counter\": {\n    \"id\": \"{{counter1}}\"\n  },\n  \"serviceTypes\": [\n    {\n      \"id\": \"{{st1}}\"\n    },\n    {\n      \"id\": \"{{st3}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/agents/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('agent' + x.badgeNumber.replace('-', ''), x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - agent Aline",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Aline\",\n  \"lastName\": \"Uwase\",\n  \"badgeNumber\": \"B-002\",\n  \"counter\": {\n    \"id\": \"{{counter2}}\"\n  },\n  \"serviceTypes\": [\n    {\n      \"id\": \"{{st2}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/agents/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('agent' + x.badgeNumber.replace('-', ''), x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - agent Eric",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Eric\",\n  \"lastName\": \"Mugisha\",\n  \"badgeNumber\": \"B-003\",\n  \"counter\": {\n    \"id\": \"{{counter3}}\"\n  },\n  \"serviceTypes\": [\n    {\n      \"id\": \"{{st1}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/agents/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('agent' + x.badgeNumber.replace('-', ''), x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - customer Diane",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Diane\",\n  \"lastName\": \"Nkurunziza\",\n  \"nationalId\": \"1199780012345678\",\n  \"phone\": \"0788000001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        var ids = {'1199780012345678': 'cust1', '1199080023456789': 'cust2', '1199280034567890': 'cust3', '1199580045678901': 'cust4', '1199380056789012': 'cust5'};",
+                  "        pm.environment.set(ids[x.nationalId], x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - customer Patrick",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Patrick\",\n  \"lastName\": \"Nkurunziza\",\n  \"nationalId\": \"1199080023456789\",\n  \"phone\": \"0788000002\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        var ids = {'1199780012345678': 'cust1', '1199080023456789': 'cust2', '1199280034567890': 'cust3', '1199580045678901': 'cust4', '1199380056789012': 'cust5'};",
+                  "        pm.environment.set(ids[x.nationalId], x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - customer Grace",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Grace\",\n  \"lastName\": \"Mukamana\",\n  \"nationalId\": \"1199280034567890\",\n  \"phone\": \"0788000003\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        var ids = {'1199780012345678': 'cust1', '1199080023456789': 'cust2', '1199280034567890': 'cust3', '1199580045678901': 'cust4', '1199380056789012': 'cust5'};",
+                  "        pm.environment.set(ids[x.nationalId], x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - customer Samuel",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Samuel\",\n  \"lastName\": \"Niyonzima\",\n  \"nationalId\": \"1199580045678901\",\n  \"phone\": \"0788000004\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        var ids = {'1199780012345678': 'cust1', '1199080023456789': 'cust2', '1199280034567890': 'cust3', '1199580045678901': 'cust4', '1199380056789012': 'cust5'};",
+                  "        pm.environment.set(ids[x.nationalId], x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - customer Olivier",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Olivier\",\n  \"lastName\": \"Habyarimana\",\n  \"nationalId\": \"1199380056789012\",\n  \"phone\": \"0788000005\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        var ids = {'1199780012345678': 'cust1', '1199080023456789': 'cust2', '1199280034567890': 'cust3', '1199580045678901': 'cust4', '1199380056789012': 'cust5'};",
+                  "        pm.environment.set(ids[x.nationalId], x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - queue ticket 1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-10-05\",\n  \"status\": \"SERVED\",\n  \"ticketNumber\": 1,\n  \"customer\": {\n    \"id\": \"{{cust1}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('lastTicketId', x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - queue ticket 2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-10-12\",\n  \"status\": \"SERVED\",\n  \"ticketNumber\": 1,\n  \"customer\": {\n    \"id\": \"{{cust3}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB002}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('lastTicketId', x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - queue ticket 3",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-10-20\",\n  \"status\": \"CALLED\",\n  \"ticketNumber\": 2,\n  \"customer\": {\n    \"id\": \"{{cust1}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('lastTicketId', x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - queue ticket 4",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-10-20\",\n  \"status\": \"SKIPPED\",\n  \"ticketNumber\": 3,\n  \"customer\": {\n    \"id\": \"{{cust2}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('lastTicketId', x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - queue ticket 5",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-10-28\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 1,\n  \"customer\": {\n    \"id\": \"{{cust4}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB003}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('lastTicketId', x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - queue ticket 6",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-11-03\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 1,\n  \"customer\": {\n    \"id\": \"{{cust1}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB002}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('lastTicketId', x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - queue ticket 7",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-11-05\",\n  \"status\": \"SERVED\",\n  \"ticketNumber\": 2,\n  \"customer\": {\n    \"id\": \"{{cust5}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB003}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('lastTicketId', x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - queue ticket 8",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-11-10\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 1,\n  \"customer\": {\n    \"id\": \"{{cust3}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('lastTicketId', x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - queue ticket 9",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-11-12\",\n  \"status\": \"CALLED\",\n  \"ticketNumber\": 2,\n  \"customer\": {\n    \"id\": \"{{cust4}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB002}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('lastTicketId', x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Seed - queue ticket 10",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-11-15\",\n  \"status\": \"SKIPPED\",\n  \"ticketNumber\": 3,\n  \"customer\": {\n    \"id\": \"{{cust5}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB003}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        pm.environment.set('lastTicketId', x.id);",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Part A",
+      "item": [
+        {
+          "name": "A2 - Save service type",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-types/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-types",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Passport Renewal\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "A2 - Save counter",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"counterNumber\": 5,\n  \"name\": \"Counter 5\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "A2 - Save agent",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Claire\",\n  \"lastName\": \"Ingabire\",\n  \"badgeNumber\": \"B-004\",\n  \"counter\": null,\n  \"serviceTypes\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "A2 - Save customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Betty\",\n  \"lastName\": \"Uwimana\",\n  \"nationalId\": \"1199480067890123\",\n  \"phone\": \"0788000006\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "A2 - Save queue ticket",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-12-01\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 1,\n  \"customer\": {\n    \"id\": \"{{cust1}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        if (x.ticketDate === '2026-12-01') {",
+                  "            pm.environment.set('testTicketId', x.id);",
+                  "        }",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get all service-types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-types/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-types",
+                "all"
+              ]
+            }
+          }
+        },
+        {
+          "name": "A2 - Get all counters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "all"
+              ]
+            }
+          }
+        },
+        {
+          "name": "A2 - Get all agents",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "all"
+              ]
+            }
+          }
+        },
+        {
+          "name": "A2 - Get all customers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "all"
+              ]
+            }
+          }
+        },
+        {
+          "name": "A2 - Get all queue-tickets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "all"
+              ]
+            }
+          }
+        },
+        {
+          "name": "A2 - Get queue ticket by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/{{testTicketId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "{{testTicketId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "A2 - Get queue ticket by id (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/99999999-9999-9999-9999-999999999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "99999999-9999-9999-9999-999999999999"
+              ]
+            }
+          }
+        },
+        {
+          "name": "A2 - Update queue ticket",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/update/{{testTicketId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "update",
+                "{{testTicketId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-12-02\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 2,\n  \"customer\": {\n    \"id\": \"{{cust1}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "A2 - Update queue ticket (404)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/update/99999999-9999-9999-9999-999999999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "update",
+                "99999999-9999-9999-9999-999999999999"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-12-02\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 2,\n  \"customer\": {\n    \"id\": \"{{cust1}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "A2 - Delete queue ticket",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/delete/{{testTicketId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "delete",
+                "{{testTicketId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "A2 - Delete queue ticket (404)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/delete/99999999-9999-9999-9999-999999999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "delete",
+                "99999999-9999-9999-9999-999999999999"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
