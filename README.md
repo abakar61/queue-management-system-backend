@@ -1,8 +1,11 @@
 # Queue Management System Backend
 
 Student: ABAKAR MAHAMAT ALI
+
 Student ID: 27480
+
 Project: Queue Management System
+
 Course: INSY 8322 Web Technology and Internet (AUCA)
 
 Spring Boot, Spring Data JPA and PostgreSQL.
