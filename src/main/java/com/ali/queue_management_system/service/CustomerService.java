@@ -56,4 +56,12 @@ public class CustomerService {
 
         return "Customer deleted successfully";
     }
+
+    public List<Customer> getByLastName(String lastName) {
+        return customerRepository.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
+    }
+
+    public List<Customer> getCustomersOfAgent(UUID agentId) {
+        return customerRepository.findCustomersOfAgent(agentId);
+    }
 }

@@ -1,6 +1,7 @@
 package com.ali.queue_management_system.controller;
 
 import com.ali.queue_management_system.model.Customer;
+import com.ali.queue_management_system.service.AgentService;
 import com.ali.queue_management_system.service.CustomerService;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,9 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private AgentService agentService;
+
     @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody Customer customer) {
         String message = customerService.save(customer);
@@ -26,6 +30,21 @@ public class CustomerController {
     @GetMapping("/all")
     public ResponseEntity<List<Customer>> getAll() {
         return ResponseEntity.ok(customerService.getAll());
+    }
+
+    @GetMapping("/by-last-name")
+    public ResponseEntity<List<Customer>> getByLastName(@RequestParam String lastName) {
+        return ResponseEntity.ok(customerService.getByLastName(lastName));
+    }
+
+    @GetMapping("/of-agent/{agentId}")
+    public ResponseEntity<?> getCustomersOfAgent(@PathVariable UUID agentId) {
+        if (agentService.getById(agentId).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("The agent with that id does not exist");
+        }
+
+        return ResponseEntity.ok(customerService.getCustomersOfAgent(agentId));
     }
 
     @GetMapping("/{id}")

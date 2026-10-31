@@ -1,7 +1,9 @@
 package com.ali.queue_management_system.controller;
 
 import com.ali.queue_management_system.model.QueueTicket;
+import com.ali.queue_management_system.model.TicketStatus;
 import com.ali.queue_management_system.service.QueueTicketService;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,6 +28,18 @@ public class QueueTicketController {
     @GetMapping("/all")
     public ResponseEntity<List<QueueTicket>> getAll() {
         return ResponseEntity.ok(queueTicketService.getAll());
+    }
+
+    @GetMapping("/by-status")
+    public ResponseEntity<List<QueueTicket>> getByStatus(@RequestParam TicketStatus status) {
+        return ResponseEntity.ok(queueTicketService.getByStatus(status));
+    }
+
+    @GetMapping("/between")
+    public ResponseEntity<List<QueueTicket>> getBetween(@RequestParam String start, @RequestParam String end) {
+        LocalDate startDate = LocalDate.parse(start);
+        LocalDate endDate = LocalDate.parse(end);
+        return ResponseEntity.ok(queueTicketService.getBetween(startDate, endDate));
     }
 
     @GetMapping("/{id}")

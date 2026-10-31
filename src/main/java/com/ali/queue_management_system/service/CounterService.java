@@ -54,4 +54,8 @@ public class CounterService {
 
         return "Counter deleted successfully";
     }
+
+    public List<Counter> getFree() {
+        return counterRepository.findFreeCounters();
+    }
 }

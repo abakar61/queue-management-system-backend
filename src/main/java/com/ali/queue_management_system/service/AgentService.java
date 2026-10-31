@@ -57,4 +57,8 @@ public class AgentService {
 
         return "Agent deleted successfully";
     }
+
+    public List<Agent> getByServiceType(String name) {
+        return agentRepository.findByServiceTypeName(name);
+    }
 }

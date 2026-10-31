@@ -53,4 +53,8 @@ public class ServiceTypeService {
 
         return "Service type deleted successfully";
     }
+
+    public List<ServiceType> getUnused() {
+        return serviceTypeRepository.findUnusedServiceTypes();
+    }
 }

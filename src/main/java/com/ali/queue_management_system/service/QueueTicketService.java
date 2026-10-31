@@ -1,7 +1,9 @@
 package com.ali.queue_management_system.service;
 
 import com.ali.queue_management_system.model.QueueTicket;
+import com.ali.queue_management_system.model.TicketStatus;
 import com.ali.queue_management_system.repository.QueueTicketRepository;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -56,5 +58,13 @@ public class QueueTicketService {
         queueTicketRepository.delete(optional.get());
 
         return "Queue ticket deleted successfully";
+    }
+
+    public List<QueueTicket> getByStatus(TicketStatus status) {
+        return queueTicketRepository.findByStatusOrderByTicketDateAsc(status);
+    }
+
+    public List<QueueTicket> getBetween(LocalDate start, LocalDate end) {
+        return queueTicketRepository.findByTicketDateBetweenOrderByTicketDateAsc(start, end);
     }
 }

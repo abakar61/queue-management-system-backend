@@ -28,6 +28,11 @@ public class AgentController {
         return ResponseEntity.ok(agentService.getAll());
     }
 
+    @GetMapping("/by-service-type")
+    public ResponseEntity<List<Agent>> getByServiceType(@RequestParam String name) {
+        return ResponseEntity.ok(agentService.getByServiceType(name));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable UUID id) {
         Optional<Agent> result = agentService.getById(id);
