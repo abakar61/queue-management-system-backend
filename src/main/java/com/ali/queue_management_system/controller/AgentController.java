@@ -66,4 +66,36 @@ public class AgentController {
 
         return ResponseEntity.ok(message);
     }
+
+    @PutMapping("/{agentId}/service-types/{serviceTypeId}")
+    public ResponseEntity<String> addServiceType(@PathVariable UUID agentId, @PathVariable UUID serviceTypeId) {
+        String message = agentService.addServiceType(agentId, serviceTypeId);
+
+        if (message.equals("The agent with that id does not exist")
+                || message.equals("That service type does not exist")) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+        }
+
+        if (message.equals("The agent already has that service type")) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+        }
+
+        return ResponseEntity.ok(message);
+    }
+
+    @PatchMapping("/{agentId}/counter")
+    public ResponseEntity<String> changeCounter(@PathVariable UUID agentId, @RequestParam int counterNumber) {
+        String message = agentService.changeCounter(agentId, counterNumber);
+
+        if (message.equals("The agent with that id does not exist")
+                || message.equals("The counter with that counterNumber does not exist")) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+        }
+
+        if (message.equals("That counter is taken by another agent")) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+        }
+
+        return ResponseEntity.ok(message);
+    }
 }

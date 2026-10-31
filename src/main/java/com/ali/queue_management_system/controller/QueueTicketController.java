@@ -22,6 +22,15 @@ public class QueueTicketController {
     @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody QueueTicket queueTicket) {
         String message = queueTicketService.save(queueTicket);
+
+        if (message.equals("Queue ticket date cannot be in the past")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+        }
+
+        if (message.equals("Agent already has an open ticket on that date")) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(message);
     }
 
@@ -71,6 +80,21 @@ public class QueueTicketController {
 
         if (message.equals("The queue ticket with that id does not exist")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+        }
+
+        return ResponseEntity.ok(message);
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<String> updateStatus(@PathVariable UUID id, @RequestParam TicketStatus status) {
+        String message = queueTicketService.updateStatus(id, status);
+
+        if (message.equals("The queue ticket with that id does not exist")) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+        }
+
+        if (message.startsWith("Cannot change status")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
         }
 
         return ResponseEntity.ok(message);

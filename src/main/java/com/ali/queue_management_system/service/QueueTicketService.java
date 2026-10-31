@@ -17,7 +17,20 @@ public class QueueTicketService {
     private QueueTicketRepository queueTicketRepository;
 
     public String save(QueueTicket queueTicket) {
+        if (queueTicket.getTicketDate().isBefore(LocalDate.now())) {
+            return "Queue ticket date cannot be in the past";
+        }
+
+        boolean agentIsBusy = queueTicketRepository.existsByAgentAndTicketDateAndStatusNot(
+                queueTicket.getAgent(), queueTicket.getTicketDate(), TicketStatus.SKIPPED);
+
+        if (agentIsBusy) {
+            return "Agent already has an open ticket on that date";
+        }
+
+        queueTicket.setStatus(TicketStatus.WAITING);
         queueTicketRepository.save(queueTicket);
+
         return "Queue ticket saved successfully";
     }
 
@@ -38,7 +51,6 @@ public class QueueTicketService {
 
         QueueTicket existingQueueTicket = optional.get();
         existingQueueTicket.setTicketDate(newQueueTicket.getTicketDate());
-        existingQueueTicket.setStatus(newQueueTicket.getStatus());
         existingQueueTicket.setTicketNumber(newQueueTicket.getTicketNumber());
         existingQueueTicket.setCustomer(newQueueTicket.getCustomer());
         existingQueueTicket.setAgent(newQueueTicket.getAgent());
@@ -46,6 +58,39 @@ public class QueueTicketService {
         queueTicketRepository.save(existingQueueTicket);
 
         return "Queue ticket updated successfully";
+    }
+
+    public String updateStatus(UUID id, TicketStatus newStatus) {
+        Optional<QueueTicket> optional = queueTicketRepository.findById(id);
+
+        if (optional.isEmpty()) {
+            return "The queue ticket with that id does not exist";
+        }
+
+        QueueTicket queueTicket = optional.get();
+        TicketStatus currentStatus = queueTicket.getStatus();
+        boolean allowed = false;
+
+        if (currentStatus == TicketStatus.WAITING) {
+            if (newStatus == TicketStatus.CALLED || newStatus == TicketStatus.SKIPPED) {
+                allowed = true;
+            }
+        }
+
+        if (currentStatus == TicketStatus.CALLED) {
+            if (newStatus == TicketStatus.SERVED || newStatus == TicketStatus.SKIPPED) {
+                allowed = true;
+            }
+        }
+
+        if (!allowed) {
+            return "Cannot change status from " + currentStatus + " to " + newStatus;
+        }
+
+        queueTicket.setStatus(newStatus);
+        queueTicketRepository.save(queueTicket);
+
+        return "Queue ticket status updated successfully";
     }
 
     public String delete(UUID id) {

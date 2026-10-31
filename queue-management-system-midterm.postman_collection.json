@@ -2124,6 +2124,1107 @@
           }
         }
       ]
+    },
+    {
+      "name": "Part D",
+      "item": [
+        {
+          "name": "D0 - Load ids (run first)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "var agents = pm.response.json();",
+                  "agents.forEach(function (a) {",
+                  "    if (a.badgeNumber === 'B-001') { pm.collectionVariables.set('dJean', a.id); }",
+                  "    if (a.badgeNumber === 'B-002') { pm.collectionVariables.set('dAline', a.id); }",
+                  "    if (a.badgeNumber === 'B-003') { pm.collectionVariables.set('dEric', a.id); }",
+                  "});",
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/service-types/all', function (err, res) {",
+                  "    res.json().forEach(function (s) {",
+                  "        if (s.name === 'Account Opening') { pm.collectionVariables.set('dAccountOpening', s.id); }",
+                  "    });",
+                  "});",
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
+                  "    res.json().forEach(function (c) {",
+                  "        if (c.nationalId === '1199780012345678') { pm.collectionVariables.set('dCustomer', c.id); }",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "all"
+              ]
+            }
+          }
+        },
+        {
+          "name": "D1 - Past date (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"Queue ticket date cannot be in the past\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"2026-10-01\",\n  \"ticketNumber\": 900,\n  \"customer\": {\n    \"id\": \"{{dCustomer}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{dEric}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "D1 - Save with status SERVED in body (201)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var month = ('0' + (Math.floor(Math.random() * 12) + 1)).slice(-2);",
+                  "var day = ('0' + (Math.floor(Math.random() * 28) + 1)).slice(-2);",
+                  "pm.collectionVariables.set('d1Date', '2028-' + month + '-' + day);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"Queue ticket saved successfully\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"{{d1Date}}\",\n  \"status\": \"SERVED\",\n  \"ticketNumber\": 901,\n  \"customer\": {\n    \"id\": \"{{dCustomer}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{dEric}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "D1 - Same agent same date (409)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 409', function () {",
+                  "    pm.response.to.have.status(409);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"Agent already has an open ticket on that date\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"{{d1Date}}\",\n  \"ticketNumber\": 902,\n  \"customer\": {\n    \"id\": \"{{dCustomer}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{dEric}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "D1 - New ticket started as WAITING",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Ticket exists and is WAITING', function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.above(0);",
+                  "    pm.expect(list[0].status).to.eql('WAITING');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/between?start={{d1Date}}&end={{d1Date}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "between"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "{{d1Date}}"
+                },
+                {
+                  "key": "end",
+                  "value": "{{d1Date}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D2 setup - Save a WAITING ticket",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var month = ('0' + (Math.floor(Math.random() * 12) + 1)).slice(-2);",
+                  "var day = ('0' + (Math.floor(Math.random() * 28) + 1)).slice(-2);",
+                  "pm.collectionVariables.set('d2Date', '2028-' + month + '-' + day);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"{{d2Date}}\",\n  \"ticketNumber\": 903,\n  \"customer\": {\n    \"id\": \"{{dCustomer}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{dAline}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "D2 setup - Find its id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.collectionVariables.set('ticketD2', pm.response.json()[0].id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/between?start={{d2Date}}&end={{d2Date}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "between"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "{{d2Date}}"
+                },
+                {
+                  "key": "end",
+                  "value": "{{d2Date}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D2 - WAITING to SERVED (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"Cannot change status from WAITING to SERVED\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/{{ticketD2}}/status?status=SERVED",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "{{ticketD2}}",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "SERVED"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D2 - WAITING to CALLED (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"Queue ticket status updated successfully\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/{{ticketD2}}/status?status=CALLED",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "{{ticketD2}}",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "CALLED"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D2 - CALLED to WAITING (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"Cannot change status from CALLED to WAITING\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/{{ticketD2}}/status?status=WAITING",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "{{ticketD2}}",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "WAITING"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D2 - CALLED to SERVED (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"Queue ticket status updated successfully\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/{{ticketD2}}/status?status=SERVED",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "{{ticketD2}}",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "SERVED"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D2 - SERVED to WAITING (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"Cannot change status from SERVED to WAITING\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/{{ticketD2}}/status?status=WAITING",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "{{ticketD2}}",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "WAITING"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D2 - Unknown id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"The queue ticket with that id does not exist\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/99999999-9999-9999-9999-999999999999/status?status=CALLED",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "99999999-9999-9999-9999-999999999999",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "CALLED"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D2 - PUT update must not change status",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"Queue ticket updated successfully\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/update/{{ticketD2}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "update",
+                "{{ticketD2}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"{{d2Date}}\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 903,\n  \"customer\": {\n    \"id\": \"{{dCustomer}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{dAline}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "D2 - Status is still SERVED",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Status is still SERVED', function () {",
+                  "    pm.expect(pm.response.json().status).to.eql('SERVED');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/{{ticketD2}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "{{ticketD2}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "D3 - Add service type to agent (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"Service type added to the agent\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/{{dAline}}/service-types/{{dAccountOpening}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "{{dAline}}",
+                "service-types",
+                "{{dAccountOpening}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "D3 - Agent already has it (409)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 409', function () {",
+                  "    pm.response.to.have.status(409);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"The agent already has that service type\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/{{dAline}}/service-types/{{dAccountOpening}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "{{dAline}}",
+                "service-types",
+                "{{dAccountOpening}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "D3 - Unknown agent (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"The agent with that id does not exist\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/99999999-9999-9999-9999-999999999999/service-types/{{dAccountOpening}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "99999999-9999-9999-9999-999999999999",
+                "service-types",
+                "{{dAccountOpening}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "D3 - Unknown service type (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"That service type does not exist\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/{{dAline}}/service-types/99999999-9999-9999-9999-999999999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "{{dAline}}",
+                "service-types",
+                "99999999-9999-9999-9999-999999999999"
+              ]
+            }
+          }
+        },
+        {
+          "name": "D3 - Check agent keeps old types",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Agent has Complaints and Account Opening', function () {",
+                  "    var names = pm.response.json().serviceTypes.map(function (s) { return s.name; });",
+                  "    pm.expect(names).to.include('Complaints');",
+                  "    pm.expect(names).to.include('Account Opening');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/{{dAline}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "{{dAline}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "D4 - Move Eric to counter 4 (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"Counter changed successfully\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/{{dEric}}/counter?counterNumber=4",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "{{dEric}}",
+                "counter"
+              ],
+              "query": [
+                {
+                  "key": "counterNumber",
+                  "value": "4"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D4 - Counter 3 is now free (C2)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Counter 3 free, counter 4 taken', function () {",
+                  "    var numbers = pm.response.json().map(function (c) { return c.counterNumber; });",
+                  "    pm.expect(numbers).to.include(3);",
+                  "    pm.expect(numbers).to.not.include(4);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/free",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "free"
+              ]
+            }
+          }
+        },
+        {
+          "name": "D4 - Counter taken by another agent (409)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 409', function () {",
+                  "    pm.response.to.have.status(409);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"That counter is taken by another agent\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/{{dAline}}/counter?counterNumber=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "{{dAline}}",
+                "counter"
+              ],
+              "query": [
+                {
+                  "key": "counterNumber",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D4 - Unknown agent (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"The agent with that id does not exist\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/99999999-9999-9999-9999-999999999999/counter?counterNumber=4",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "99999999-9999-9999-9999-999999999999",
+                "counter"
+              ],
+              "query": [
+                {
+                  "key": "counterNumber",
+                  "value": "4"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D4 - Unknown counter (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"The counter with that counterNumber does not exist\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/{{dEric}}/counter?counterNumber=99",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "{{dEric}}",
+                "counter"
+              ],
+              "query": [
+                {
+                  "key": "counterNumber",
+                  "value": "99"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "D4 - Move Eric back to counter 3 (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Message is correct', function () {",
+                  "    pm.expect(pm.response.text()).to.eql(\"Counter changed successfully\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/{{dEric}}/counter?counterNumber=3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "{{dEric}}",
+                "counter"
+              ],
+              "query": [
+                {
+                  "key": "counterNumber",
+                  "value": "3"
+                }
+              ]
+            }
+          }
+        }
+      ]
     }
   ],
   "variable": [
