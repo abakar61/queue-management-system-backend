@@ -5,7 +5,7 @@ Student ID: 27480
 Project: Queue Management System
 Course: INSY 8322 Web Technology and Internet (AUCA)
 
-Spring Boot, Spring Data JPA and PostgreSQL. This project contains Step 0, Part A, B, C, D, E and F.
+Spring Boot, Spring Data JPA and PostgreSQL. This project contains Step 0, Part A, B, C, D, E, F and the two bonus requirements.
 
 ## Steps to run the API
 
@@ -51,3 +51,5 @@ The API runs on http://localhost:8080.
 | E3 | DELETE /api/service-notes/delete/{id} and DELETE /api/queue-tickets/delete/{id} |
 | F1 | GET /api/queue-tickets/stats/by-status |
 | F2 | PATCH /api/queue-tickets/cancel-day?agentId=...&date=2026-10-20 |
+| Bonus | GET /api/dashboard/summary |
+| Bonus | GET /api/queue-tickets/page?page=0&size=5&sort=ticketDate,desc |

@@ -3538,6 +3538,97 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Bonus",
+      "item": [
+        {
+          "name": "Bonus - Dashboard summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/dashboard/summary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "dashboard",
+                "summary"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Dashboard keys in order', function () {",
+                  "    var body = pm.response.json();",
+                  "    pm.expect(Object.keys(body)).to.eql(['customers', 'agents', 'freeCounters', 'ticketsToday', 'waiting', 'serviceNotes']);",
+                  "    pm.expect(body.customers).to.eql(5);",
+                  "    pm.expect(body.agents).to.eql(3);",
+                  "    pm.expect(body.freeCounters).to.eql(1);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Bonus - Queue tickets page by page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/page?page=0&size=5&sort=ticketDate,desc",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "page"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sort",
+                  "value": "ticketDate,desc"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Page shows totals and newest date first', function () {",
+                  "    var body = pm.response.json();",
+                  "    pm.expect(body.content.length).to.eql(5);",
+                  "    pm.expect(body.totalElements).to.be.at.least(10);",
+                  "    pm.expect(body.totalPages).to.be.at.least(2);",
+                  "    pm.expect(body.content[0].ticketDate >= body.content[1].ticketDate).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

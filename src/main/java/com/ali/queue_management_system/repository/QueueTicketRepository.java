@@ -19,6 +19,10 @@ public interface QueueTicketRepository extends JpaRepository<QueueTicket, UUID> 
 
     boolean existsByAgentAndTicketDateAndStatusNot(Agent agent, LocalDate ticketDate, TicketStatus status);
 
+    long countByStatus(TicketStatus status);
+
+    long countByTicketDate(LocalDate ticketDate);
+
     @Query("SELECT t.status, COUNT(t) FROM QueueTicket t GROUP BY t.status")
     List<Object[]> countTicketsByStatus();
 
