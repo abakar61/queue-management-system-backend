@@ -3,1425 +3,158 @@
     "name": "queue-management-system-midterm",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
-  "item": [
+  "variable": [
     {
-      "name": "Step 0 - seed data",
-      "item": [
-        {
-          "name": "Seed - service type Bill Payment",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/service-types/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "service-types",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Bill Payment\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/service-types/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        var names = {'Bill Payment': 'st1', 'Account Opening': 'st2', 'Complaints': 'st3', 'Loan Enquiry': 'st4'};",
-                  "        pm.environment.set(names[x.name], x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - service type Account Opening",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/service-types/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "service-types",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Account Opening\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/service-types/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        var names = {'Bill Payment': 'st1', 'Account Opening': 'st2', 'Complaints': 'st3', 'Loan Enquiry': 'st4'};",
-                  "        pm.environment.set(names[x.name], x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - service type Complaints",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/service-types/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "service-types",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Complaints\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/service-types/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        var names = {'Bill Payment': 'st1', 'Account Opening': 'st2', 'Complaints': 'st3', 'Loan Enquiry': 'st4'};",
-                  "        pm.environment.set(names[x.name], x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - service type Loan Enquiry",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/service-types/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "service-types",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Loan Enquiry\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/service-types/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        var names = {'Bill Payment': 'st1', 'Account Opening': 'st2', 'Complaints': 'st3', 'Loan Enquiry': 'st4'};",
-                  "        pm.environment.set(names[x.name], x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - counter 1",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/counters/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "counters",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"counterNumber\": 1,\n  \"name\": \"Counter 1\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/counters/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('counter' + x.counterNumber, x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - counter 2",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/counters/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "counters",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"counterNumber\": 2,\n  \"name\": \"Counter 2\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/counters/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('counter' + x.counterNumber, x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - counter 3",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/counters/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "counters",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"counterNumber\": 3,\n  \"name\": \"Counter 3\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/counters/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('counter' + x.counterNumber, x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - counter 4",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/counters/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "counters",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"counterNumber\": 4,\n  \"name\": \"Counter 4\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/counters/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('counter' + x.counterNumber, x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - agent Jean",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/agents/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "agents",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Jean\",\n  \"lastName\": \"Habimana\",\n  \"badgeNumber\": \"B-001\",\n  \"counter\": {\n    \"id\": \"{{counter1}}\"\n  },\n  \"serviceTypes\": [\n    {\n      \"id\": \"{{st1}}\"\n    },\n    {\n      \"id\": \"{{st3}}\"\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/agents/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('agent' + x.badgeNumber.replace('-', ''), x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - agent Aline",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/agents/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "agents",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Aline\",\n  \"lastName\": \"Uwase\",\n  \"badgeNumber\": \"B-002\",\n  \"counter\": {\n    \"id\": \"{{counter2}}\"\n  },\n  \"serviceTypes\": [\n    {\n      \"id\": \"{{st2}}\"\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/agents/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('agent' + x.badgeNumber.replace('-', ''), x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - agent Eric",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/agents/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "agents",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Eric\",\n  \"lastName\": \"Mugisha\",\n  \"badgeNumber\": \"B-003\",\n  \"counter\": {\n    \"id\": \"{{counter3}}\"\n  },\n  \"serviceTypes\": [\n    {\n      \"id\": \"{{st1}}\"\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/agents/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('agent' + x.badgeNumber.replace('-', ''), x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - customer Diane",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/customers/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "customers",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Diane\",\n  \"lastName\": \"Nkurunziza\",\n  \"nationalId\": \"1199780012345678\",\n  \"phone\": \"0788000001\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        var ids = {'1199780012345678': 'cust1', '1199080023456789': 'cust2', '1199280034567890': 'cust3', '1199580045678901': 'cust4', '1199380056789012': 'cust5'};",
-                  "        pm.environment.set(ids[x.nationalId], x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - customer Patrick",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/customers/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "customers",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Patrick\",\n  \"lastName\": \"Nkurunziza\",\n  \"nationalId\": \"1199080023456789\",\n  \"phone\": \"0788000002\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        var ids = {'1199780012345678': 'cust1', '1199080023456789': 'cust2', '1199280034567890': 'cust3', '1199580045678901': 'cust4', '1199380056789012': 'cust5'};",
-                  "        pm.environment.set(ids[x.nationalId], x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - customer Grace",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/customers/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "customers",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Grace\",\n  \"lastName\": \"Mukamana\",\n  \"nationalId\": \"1199280034567890\",\n  \"phone\": \"0788000003\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        var ids = {'1199780012345678': 'cust1', '1199080023456789': 'cust2', '1199280034567890': 'cust3', '1199580045678901': 'cust4', '1199380056789012': 'cust5'};",
-                  "        pm.environment.set(ids[x.nationalId], x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - customer Samuel",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/customers/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "customers",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Samuel\",\n  \"lastName\": \"Niyonzima\",\n  \"nationalId\": \"1199580045678901\",\n  \"phone\": \"0788000004\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        var ids = {'1199780012345678': 'cust1', '1199080023456789': 'cust2', '1199280034567890': 'cust3', '1199580045678901': 'cust4', '1199380056789012': 'cust5'};",
-                  "        pm.environment.set(ids[x.nationalId], x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - customer Olivier",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/customers/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "customers",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Olivier\",\n  \"lastName\": \"Habyarimana\",\n  \"nationalId\": \"1199380056789012\",\n  \"phone\": \"0788000005\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        var ids = {'1199780012345678': 'cust1', '1199080023456789': 'cust2', '1199280034567890': 'cust3', '1199580045678901': 'cust4', '1199380056789012': 'cust5'};",
-                  "        pm.environment.set(ids[x.nationalId], x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - queue ticket 1",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-10-05\",\n  \"status\": \"SERVED\",\n  \"ticketNumber\": 1,\n  \"customer\": {\n    \"id\": \"{{cust1}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('lastTicketId', x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - queue ticket 2",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-10-12\",\n  \"status\": \"SERVED\",\n  \"ticketNumber\": 1,\n  \"customer\": {\n    \"id\": \"{{cust3}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB002}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('lastTicketId', x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - queue ticket 3",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-10-20\",\n  \"status\": \"CALLED\",\n  \"ticketNumber\": 2,\n  \"customer\": {\n    \"id\": \"{{cust1}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('lastTicketId', x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - queue ticket 4",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-10-20\",\n  \"status\": \"SKIPPED\",\n  \"ticketNumber\": 3,\n  \"customer\": {\n    \"id\": \"{{cust2}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('lastTicketId', x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - queue ticket 5",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-10-28\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 1,\n  \"customer\": {\n    \"id\": \"{{cust4}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB003}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('lastTicketId', x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - queue ticket 6",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-11-03\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 1,\n  \"customer\": {\n    \"id\": \"{{cust1}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB002}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('lastTicketId', x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - queue ticket 7",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-11-05\",\n  \"status\": \"SERVED\",\n  \"ticketNumber\": 2,\n  \"customer\": {\n    \"id\": \"{{cust5}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB003}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('lastTicketId', x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - queue ticket 8",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-11-10\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 1,\n  \"customer\": {\n    \"id\": \"{{cust3}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('lastTicketId', x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - queue ticket 9",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-11-12\",\n  \"status\": \"CALLED\",\n  \"ticketNumber\": 2,\n  \"customer\": {\n    \"id\": \"{{cust4}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB002}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('lastTicketId', x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Seed - queue ticket 10",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-11-15\",\n  \"status\": \"SKIPPED\",\n  \"ticketNumber\": 3,\n  \"customer\": {\n    \"id\": \"{{cust5}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB003}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        pm.environment.set('lastTicketId', x.id);",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        }
-      ]
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
     },
     {
-      "name": "Part A",
+      "key": "st1",
+      "value": "10000000-0000-0000-0000-000000000001"
+    },
+    {
+      "key": "counter1",
+      "value": "20000000-0000-0000-0000-000000000001"
+    },
+    {
+      "key": "st2",
+      "value": "10000000-0000-0000-0000-000000000002"
+    },
+    {
+      "key": "counter2",
+      "value": "20000000-0000-0000-0000-000000000002"
+    },
+    {
+      "key": "st3",
+      "value": "10000000-0000-0000-0000-000000000003"
+    },
+    {
+      "key": "counter3",
+      "value": "20000000-0000-0000-0000-000000000003"
+    },
+    {
+      "key": "st4",
+      "value": "10000000-0000-0000-0000-000000000004"
+    },
+    {
+      "key": "counter4",
+      "value": "20000000-0000-0000-0000-000000000004"
+    },
+    {
+      "key": "agent1",
+      "value": "30000000-0000-0000-0000-000000000001"
+    },
+    {
+      "key": "agent2",
+      "value": "30000000-0000-0000-0000-000000000002"
+    },
+    {
+      "key": "agent3",
+      "value": "30000000-0000-0000-0000-000000000003"
+    },
+    {
+      "key": "cust1",
+      "value": "40000000-0000-0000-0000-000000000001"
+    },
+    {
+      "key": "cust2",
+      "value": "40000000-0000-0000-0000-000000000002"
+    },
+    {
+      "key": "cust3",
+      "value": "40000000-0000-0000-0000-000000000003"
+    },
+    {
+      "key": "cust4",
+      "value": "40000000-0000-0000-0000-000000000004"
+    },
+    {
+      "key": "cust5",
+      "value": "40000000-0000-0000-0000-000000000005"
+    },
+    {
+      "key": "ticket1",
+      "value": "50000000-0000-0000-0000-000000000001"
+    },
+    {
+      "key": "ticket2",
+      "value": "50000000-0000-0000-0000-000000000002"
+    },
+    {
+      "key": "ticket3",
+      "value": "50000000-0000-0000-0000-000000000003"
+    },
+    {
+      "key": "ticket4",
+      "value": "50000000-0000-0000-0000-000000000004"
+    },
+    {
+      "key": "ticket5",
+      "value": "50000000-0000-0000-0000-000000000005"
+    },
+    {
+      "key": "ticket6",
+      "value": "50000000-0000-0000-0000-000000000006"
+    },
+    {
+      "key": "ticket7",
+      "value": "50000000-0000-0000-0000-000000000007"
+    },
+    {
+      "key": "ticket8",
+      "value": "50000000-0000-0000-0000-000000000008"
+    },
+    {
+      "key": "ticket9",
+      "value": "50000000-0000-0000-0000-000000000009"
+    },
+    {
+      "key": "ticket10",
+      "value": "50000000-0000-0000-0000-000000000010"
+    },
+    {
+      "key": "unknownId",
+      "value": "99999999-9999-9999-9999-999999999999"
+    },
+    {
+      "key": "dianeNationalId",
+      "value": "1199780012345678"
+    },
+    {
+      "key": "graceNationalId",
+      "value": "1199280034567890"
+    },
+    {
+      "key": "patrickNationalId",
+      "value": "1199080023456789"
+    },
+    {
+      "key": "tmpId",
+      "value": ""
+    },
+    {
+      "key": "d1Date",
+      "value": ""
+    },
+    {
+      "key": "d1TicketId",
+      "value": ""
+    },
+    {
+      "key": "noteId",
+      "value": ""
+    },
+    {
+      "key": "a2Date",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Step 0 - seed data check",
       "item": [
         {
-          "name": "A2 - Save service type",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/service-types/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "service-types",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Passport Renewal\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "A2 - Save counter",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/counters/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "counters",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"counterNumber\": 5,\n  \"name\": \"Counter 5\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "A2 - Save agent",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/agents/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "agents",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Claire\",\n  \"lastName\": \"Ingabire\",\n  \"badgeNumber\": \"B-004\",\n  \"counter\": null,\n  \"serviceTypes\": []\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "A2 - Save customer",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/customers/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "customers",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Betty\",\n  \"lastName\": \"Uwimana\",\n  \"nationalId\": \"1199480067890123\",\n  \"phone\": \"0788000006\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "A2 - Save queue ticket",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-12-01\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 1,\n  \"customer\": {\n    \"id\": \"{{cust1}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
-                  "    res.json().forEach(function (x) {",
-                  "        if (x.ticketDate === '2026-12-01') {",
-                  "            pm.environment.set('testTicketId', x.id);",
-                  "        }",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "A2 - Get all service-types",
+          "name": "Step 0 - 4 service types",
           "request": {
             "method": "GET",
             "header": [],
@@ -1436,10 +169,25 @@
                 "all"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"4 service types\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.at.least(4);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
-          "name": "A2 - Get all counters",
+          "name": "Step 0 - 4 counters",
           "request": {
             "method": "GET",
             "header": [],
@@ -1454,10 +202,25 @@
                 "all"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"4 counters\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.at.least(4);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
-          "name": "A2 - Get all agents",
+          "name": "Step 0 - 3 agents",
           "request": {
             "method": "GET",
             "header": [],
@@ -1472,10 +235,25 @@
                 "all"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"3 agents\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.at.least(3);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
-          "name": "A2 - Get all customers",
+          "name": "Step 0 - 5 customers",
           "request": {
             "method": "GET",
             "header": [],
@@ -1490,10 +268,25 @@
                 "all"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"5 customers\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.at.least(5);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
-          "name": "A2 - Get all queue-tickets",
+          "name": "Step 0 - 10 queue tickets",
           "request": {
             "method": "GET",
             "header": [],
@@ -1508,46 +301,142 @@
                 "all"
               ]
             }
-          }
-        },
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"10 queue tickets\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.at.least(10);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Part A",
+      "item": [
         {
-          "name": "A2 - Get queue ticket by id",
+          "name": "A2 - Save service type (201)",
           "request": {
-            "method": "GET",
-            "header": [],
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/{{testTicketId}}",
+              "raw": "{{baseUrl}}/api/service-types/save",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
-                "queue-tickets",
-                "{{testTicketId}}"
+                "service-types",
+                "save"
               ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Temp Service\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Service type saved successfully\"); });",
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/service-types/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        if (x.name === 'Temp Service') { pm.collectionVariables.set('tmpId', x.id); }",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
-          "name": "A2 - Get queue ticket by id (404)",
+          "name": "A2 - Get all service-types (200)",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/99999999-9999-9999-9999-999999999999",
+              "raw": "{{baseUrl}}/api/service-types/all",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
-                "queue-tickets",
-                "99999999-9999-9999-9999-999999999999"
+                "service-types",
+                "all"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"List is not empty\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
-          "name": "A2 - Update queue ticket",
+          "name": "A2 - Get service type by id (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-types/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-types",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Entity has the saved id', function () { pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('tmpId')); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Update service type (200)",
           "request": {
             "method": "PUT",
             "header": [
@@ -1557,30 +446,42 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/update/{{testTicketId}}",
+              "raw": "{{baseUrl}}/api/service-types/update/{{tmpId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
-                "queue-tickets",
+                "service-types",
                 "update",
-                "{{testTicketId}}"
+                "{{tmpId}}"
               ]
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-12-02\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 2,\n  \"customer\": {\n    \"id\": \"{{cust1}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
+              "raw": "{\n  \"name\": \"Temp Service Updated\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Service type updated successfully\"); });"
+                ]
+              }
+            }
+          ]
         },
         {
-          "name": "A2 - Update queue ticket (404)",
+          "name": "A2 - Update service type unknown id (404)",
           "request": {
             "method": "PUT",
             "header": [
@@ -1590,7 +491,1026 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/update/99999999-9999-9999-9999-999999999999",
+              "raw": "{{baseUrl}}/api/service-types/update/{{unknownId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-types",
+                "update",
+                "{{unknownId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Temp Service Updated\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The service type with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Delete service type (200)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-types/delete/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-types",
+                "delete",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Service type deleted successfully\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get service type after delete (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-types/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-types",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The service type with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Save counter (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"counterNumber\": 99,\n  \"name\": \"Temp Counter\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Counter saved successfully\"); });",
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/counters/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        if (x.counterNumber === 99) { pm.collectionVariables.set('tmpId', x.id); }",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get all counters (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "all"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"List is not empty\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get counter by id (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Entity has the saved id', function () { pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('tmpId')); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Update counter (200)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/update/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "update",
+                "{{tmpId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"counterNumber\": 99,\n  \"name\": \"Temp Counter Updated\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Counter updated successfully\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Update counter unknown id (404)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/update/{{unknownId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "update",
+                "{{unknownId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"counterNumber\": 99,\n  \"name\": \"Temp Counter Updated\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The counter with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Delete counter (200)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/delete/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "delete",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Counter deleted successfully\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get counter after delete (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/counters/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "counters",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The counter with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Save customer (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Temp\",\n  \"lastName\": \"Customer\",\n  \"nationalId\": \"0000000000000001\",\n  \"phone\": \"0788999999\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Customer saved successfully\"); });",
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        if (x.nationalId === '0000000000000001') { pm.collectionVariables.set('tmpId', x.id); }",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get all customers (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "all"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"List is not empty\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get customer by id (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Entity has the saved id', function () { pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('tmpId')); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Update customer (200)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/update/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "update",
+                "{{tmpId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Temp\",\n  \"lastName\": \"Updated\",\n  \"nationalId\": \"0000000000000001\",\n  \"phone\": \"0788999999\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Customer updated successfully\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Update customer unknown id (404)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/update/{{unknownId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "update",
+                "{{unknownId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Temp\",\n  \"lastName\": \"Updated\",\n  \"nationalId\": \"0000000000000001\",\n  \"phone\": \"0788999999\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The customer with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Delete customer (200)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/delete/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "delete",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Customer deleted successfully\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get customer after delete (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/customers/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "customers",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The customer with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Save agent (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Temp\",\n  \"lastName\": \"Agent\",\n  \"badgeNumber\": \"B-TMP\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Agent saved successfully\"); });",
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/agents/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        if (x.badgeNumber === 'B-TMP') { pm.collectionVariables.set('tmpId', x.id); }",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get all agents (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "all"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"List is not empty\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get agent by id (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Entity has the saved id', function () { pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('tmpId')); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Update agent (200)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/update/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "update",
+                "{{tmpId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Temp\",\n  \"lastName\": \"AgentUpdated\",\n  \"badgeNumber\": \"B-TMP\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Agent updated successfully\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Update agent unknown id (404)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/update/{{unknownId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "update",
+                "{{unknownId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Temp\",\n  \"lastName\": \"AgentUpdated\",\n  \"badgeNumber\": \"B-TMP\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The agent with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Delete agent (200)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/delete/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "delete",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Agent deleted successfully\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get agent after delete (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The agent with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Save queue ticket (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"{{a2Date}}\",\n  \"ticketNumber\": 777,\n  \"customer\": {\n    \"id\": \"{{cust5}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agent3}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var year = 2100 + Math.floor(Math.random() * 100);",
+                  "var month = ('0' + (Math.floor(Math.random() * 12) + 1)).slice(-2);",
+                  "var day = ('0' + (Math.floor(Math.random() * 28) + 1)).slice(-2);",
+                  "pm.collectionVariables.set('a2Date', year + '-' + month + '-' + day);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Queue ticket saved successfully\"); });",
+                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/queue-tickets/all', function (err, res) {",
+                  "    res.json().forEach(function (x) {",
+                  "        if (x.ticketNumber === 777) { pm.collectionVariables.set('tmpId', x.id); }",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get all queue-tickets (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "all"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"List is not empty\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Get queue ticket by id (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/{{tmpId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "{{tmpId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Entity has the saved id', function () { pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('tmpId')); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Update queue ticket (200)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/update/{{tmpId}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -1598,27 +1518,84 @@
                 "api",
                 "queue-tickets",
                 "update",
-                "99999999-9999-9999-9999-999999999999"
+                "{{tmpId}}"
               ]
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-12-02\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 2,\n  \"customer\": {\n    \"id\": \"{{cust1}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agentB001}}\"\n  }\n}",
+              "raw": "{\n  \"ticketDate\": \"{{a2Date}}\",\n  \"ticketNumber\": 778,\n  \"customer\": {\n    \"id\": \"{{cust5}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agent3}}\"\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Queue ticket updated successfully\"); });"
+                ]
+              }
+            }
+          ]
         },
         {
-          "name": "A2 - Delete queue ticket",
+          "name": "A2 - Update queue ticket unknown id (404)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/update/{{unknownId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "update",
+                "{{unknownId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"{{a2Date}}\",\n  \"ticketNumber\": 778,\n  \"customer\": {\n    \"id\": \"{{cust5}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agent3}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The queue ticket with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 - Delete queue ticket (200)",
           "request": {
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/delete/{{testTicketId}}",
+              "raw": "{{baseUrl}}/api/queue-tickets/delete/{{tmpId}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -1626,29 +1603,52 @@
                 "api",
                 "queue-tickets",
                 "delete",
-                "{{testTicketId}}"
+                "{{tmpId}}"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Queue ticket deleted successfully\"); });"
+                ]
+              }
+            }
+          ]
         },
         {
-          "name": "A2 - Delete queue ticket (404)",
+          "name": "A2 - Get queue ticket after delete (404)",
           "request": {
-            "method": "DELETE",
+            "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/delete/99999999-9999-9999-9999-999999999999",
+              "raw": "{{baseUrl}}/api/queue-tickets/{{tmpId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "queue-tickets",
-                "delete",
-                "99999999-9999-9999-9999-999999999999"
+                "{{tmpId}}"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The queue ticket with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -1656,23 +1656,7 @@
       "name": "Part B",
       "item": [
         {
-          "name": "B1 - Customers by lastName",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('At least one row', function () {",
-                  "    pm.expect(pm.response.json().length).to.be.above(0);",
-                  "});"
-                ]
-              }
-            }
-          ],
+          "name": "B1 - Customers by lastName (case insensitive, sorted)",
           "request": {
             "method": "GET",
             "header": [],
@@ -1693,26 +1677,25 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "B1 - Customers by lastName (nobody matches)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Empty list', function () {",
-                  "    pm.expect(pm.response.json().length).to.eql(0);",
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Two Nkurunziza sorted by firstName\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.map(function (c) { return c.firstName; })).to.eql(['Diane', 'Patrick']);",
                   "});"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "B1 - Customers by lastName (nobody matches)",
           "request": {
             "method": "GET",
             "header": [],
@@ -1733,26 +1716,25 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "B2 - Queue tickets by status WAITING",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('At least one row', function () {",
-                  "    pm.expect(pm.response.json().length).to.be.above(0);",
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Empty list\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.eql(0);",
                   "});"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "B2 - Queue tickets by status WAITING",
           "request": {
             "method": "GET",
             "header": [],
@@ -1773,26 +1755,27 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "B2 - Queue tickets by status SERVED",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('At least one row', function () {",
-                  "    pm.expect(pm.response.json().length).to.be.above(0);",
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"All WAITING and earliest date first\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.at.least(3);",
+                  "    list.forEach(function (t) { pm.expect(t.status).to.eql('WAITING'); });",
+                  "    for (var i = 1; i < list.length; i++) { pm.expect(list[i - 1].ticketDate <= list[i].ticketDate).to.be.true; }",
                   "});"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "B2 - Queue tickets by status SERVED",
           "request": {
             "method": "GET",
             "header": [],
@@ -1813,26 +1796,26 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "B3 - Queue tickets between dates (October)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('At least one row', function () {",
-                  "    pm.expect(pm.response.json().length).to.be.above(0);",
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"All SERVED\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.at.least(3);",
+                  "    list.forEach(function (t) { pm.expect(t.status).to.eql('SERVED'); });",
                   "});"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "B3 - Queue tickets between dates (October)",
           "request": {
             "method": "GET",
             "header": [],
@@ -1857,31 +1840,31 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "B3 - Queue tickets between dates (empty range)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Empty list', function () {",
-                  "    pm.expect(pm.response.json().length).to.eql(0);",
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"5 tickets in October ordered by date\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.eql(5);",
+                  "    for (var i = 1; i < list.length; i++) { pm.expect(list[i - 1].ticketDate <= list[i].ticketDate).to.be.true; }",
                   "});"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "B3 - Queue tickets between dates (empty range)",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/between?start=2025-01-01&end=2025-01-31",
+              "raw": "{{baseUrl}}/api/queue-tickets/between?start=2027-01-01&end=2027-01-31",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -1893,15 +1876,30 @@
               "query": [
                 {
                   "key": "start",
-                  "value": "2025-01-01"
+                  "value": "2027-01-01"
                 },
                 {
                   "key": "end",
-                  "value": "2025-01-31"
+                  "value": "2027-01-31"
                 }
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Empty list\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.eql(0);",
+                  "});"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -1910,22 +1908,6 @@
       "item": [
         {
           "name": "C1 - Agents by service type payment",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('At least one row', function () {",
-                  "    pm.expect(pm.response.json().length).to.be.above(0);",
-                  "});"
-                ]
-              }
-            }
-          ],
           "request": {
             "method": "GET",
             "header": [],
@@ -1946,26 +1928,66 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "C1 - Agents by service type (nobody)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Empty list', function () {",
-                  "    pm.expect(pm.response.json().length).to.eql(0);",
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Jean and Eric hold Bill Payment\", function () {",
+                  "    var list = pm.response.json();",
+                  "    var names = list.map(function (a) { return a.firstName; }).sort();",
+                  "    pm.expect(names).to.eql(['Eric', 'Jean']);",
                   "});"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "C1 - Agents by service type COMPLAINTS (upper case)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/by-service-type?name=COMPLAINTS",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "by-service-type"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "COMPLAINTS"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Jean only\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.eql(1);",
+                  "    pm.expect(list[0].firstName).to.eql('Jean');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "C1 - Agents by service type (nobody)",
           "request": {
             "method": "GET",
             "header": [],
@@ -1986,26 +2008,25 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "C2 - Free counters",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('At least one row', function () {",
-                  "    pm.expect(pm.response.json().length).to.be.above(0);",
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Empty list\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.eql(0);",
                   "});"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "C2 - Free counters",
           "request": {
             "method": "GET",
             "header": [],
@@ -2020,26 +2041,26 @@
                 "free"
               ]
             }
-          }
-        },
-        {
-          "name": "C3 - Unused service types",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('At least one row', function () {",
-                  "    pm.expect(pm.response.json().length).to.be.above(0);",
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Counter 4 is free\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.eql(1);",
+                  "    pm.expect(list[0].counterNumber).to.eql(4);",
                   "});"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "C3 - Unused service types",
           "request": {
             "method": "GET",
             "header": [],
@@ -2054,31 +2075,31 @@
                 "unused"
               ]
             }
-          }
-        },
-        {
-          "name": "C4 - Customers of an agent",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('At least one row', function () {",
-                  "    pm.expect(pm.response.json().length).to.be.above(0);",
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Loan Enquiry is unused\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.eql(1);",
+                  "    pm.expect(list[0].name).to.eql('Loan Enquiry');",
                   "});"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "C4 - Customers of an agent (distinct)",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/customers/of-agent/{{agentB001}}",
+              "raw": "{{baseUrl}}/api/customers/of-agent/{{agent1}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -2086,31 +2107,35 @@
                 "api",
                 "customers",
                 "of-agent",
-                "{{agentB001}}"
+                "{{agent1}}"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"3 different customers, each once\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.eql(3);",
+                  "    var ids = list.map(function (c) { return c.id; });",
+                  "    pm.expect(new Set(ids).size).to.eql(3);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "C4 - Customers of an agent (404)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 404', function () {",
-                  "    pm.response.to.have.status(404);",
-                  "});"
-                ]
-              }
-            }
-          ],
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/customers/of-agent/99999999-9999-9999-9999-999999999999",
+              "raw": "{{baseUrl}}/api/customers/of-agent/{{unknownId}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -2118,10 +2143,22 @@
                 "api",
                 "customers",
                 "of-agent",
-                "99999999-9999-9999-9999-999999999999"
+                "{{unknownId}}"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The agent with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -2129,70 +2166,7 @@
       "name": "Part D",
       "item": [
         {
-          "name": "D0 - Load ids (run first)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "var agents = pm.response.json();",
-                  "agents.forEach(function (a) {",
-                  "    if (a.badgeNumber === 'B-001') { pm.collectionVariables.set('dJean', a.id); }",
-                  "    if (a.badgeNumber === 'B-002') { pm.collectionVariables.set('dAline', a.id); }",
-                  "    if (a.badgeNumber === 'B-003') { pm.collectionVariables.set('dEric', a.id); }",
-                  "});",
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/service-types/all', function (err, res) {",
-                  "    res.json().forEach(function (s) {",
-                  "        if (s.name === 'Account Opening') { pm.collectionVariables.set('dAccountOpening', s.id); }",
-                  "    });",
-                  "});",
-                  "pm.sendRequest(pm.variables.get('baseUrl') + '/api/customers/all', function (err, res) {",
-                  "    res.json().forEach(function (c) {",
-                  "        if (c.nationalId === '1199780012345678') { pm.collectionVariables.set('dCustomer', c.id); }",
-                  "    });",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/agents/all",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "agents",
-                "all"
-              ]
-            }
-          }
-        },
-        {
           "name": "D1 - Past date (400)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 400', function () {",
-                  "    pm.response.to.have.status(400);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"Queue ticket date cannot be in the past\");",
-                  "});"
-                ]
-              }
-            }
-          ],
           "request": {
             "method": "POST",
             "header": [
@@ -2214,26 +2188,68 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"2026-10-01\",\n  \"ticketNumber\": 900,\n  \"customer\": {\n    \"id\": \"{{dCustomer}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{dEric}}\"\n  }\n}",
+              "raw": "{\n  \"ticketDate\": \"2026-10-01\",\n  \"ticketNumber\": 900,\n  \"customer\": {\n    \"id\": \"{{cust5}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agent3}}\"\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Queue ticket date cannot be in the past\"); });"
+                ]
+              }
+            }
+          ]
         },
         {
-          "name": "D1 - Save with status SERVED in body (201)",
+          "name": "D1 - Safe saving with status SERVED in body (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticketDate\": \"{{d1Date}}\",\n  \"ticketNumber\": 901,\n  \"customer\": {\n    \"id\": \"{{cust5}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agent3}}\"\n  },\n  \"status\": \"SERVED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
           "event": [
             {
               "listen": "prerequest",
               "script": {
                 "type": "text/javascript",
                 "exec": [
+                  "var year = 2100 + Math.floor(Math.random() * 100);",
                   "var month = ('0' + (Math.floor(Math.random() * 12) + 1)).slice(-2);",
                   "var day = ('0' + (Math.floor(Math.random() * 28) + 1)).slice(-2);",
-                  "pm.collectionVariables.set('d1Date', '2028-' + month + '-' + day);"
+                  "pm.collectionVariables.set('d1Date', year + '-' + month + '-' + day);"
                 ]
               }
             },
@@ -2242,64 +2258,15 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 201', function () {",
-                  "    pm.response.to.have.status(201);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"Queue ticket saved successfully\");",
-                  "});"
+                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Queue ticket saved successfully\"); });"
                 ]
               }
             }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"{{d1Date}}\",\n  \"status\": \"SERVED\",\n  \"ticketNumber\": 901,\n  \"customer\": {\n    \"id\": \"{{dCustomer}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{dEric}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          }
+          ]
         },
         {
           "name": "D1 - Same agent same date (409)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 409', function () {",
-                  "    pm.response.to.have.status(409);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"Agent already has an open ticket on that date\");",
-                  "});"
-                ]
-              }
-            }
-          ],
           "request": {
             "method": "POST",
             "header": [
@@ -2321,35 +2288,29 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"{{d1Date}}\",\n  \"ticketNumber\": 902,\n  \"customer\": {\n    \"id\": \"{{dCustomer}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{dEric}}\"\n  }\n}",
+              "raw": "{\n  \"ticketDate\": \"{{d1Date}}\",\n  \"ticketNumber\": 902,\n  \"customer\": {\n    \"id\": \"{{cust5}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agent3}}\"\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             }
-          }
-        },
-        {
-          "name": "D1 - New ticket started as WAITING",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Ticket exists and is WAITING', function () {",
-                  "    var list = pm.response.json();",
-                  "    pm.expect(list.length).to.be.above(0);",
-                  "    pm.expect(list[0].status).to.eql('WAITING');",
-                  "});"
+                  "pm.test('Status is 409', function () { pm.response.to.have.status(409); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Agent already has an open ticket on that date\"); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D1 - New ticket started as WAITING",
           "request": {
             "method": "GET",
             "header": [],
@@ -2374,136 +2335,39 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "D2 setup - Save a WAITING ticket",
+          },
           "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "var month = ('0' + (Math.floor(Math.random() * 12) + 1)).slice(-2);",
-                  "var day = ('0' + (Math.floor(Math.random() * 28) + 1)).slice(-2);",
-                  "pm.collectionVariables.set('d2Date', '2028-' + month + '-' + day);"
-                ]
-              }
-            },
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 201', function () {",
-                  "    pm.response.to.have.status(201);",
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"One ticket, status WAITING\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.eql(1);",
+                  "    pm.expect(list[0].status).to.eql('WAITING');",
+                  "    pm.collectionVariables.set('d1TicketId', list[0].id);",
                   "});"
                 ]
               }
             }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/save",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "save"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"{{d2Date}}\",\n  \"ticketNumber\": 903,\n  \"customer\": {\n    \"id\": \"{{dCustomer}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{dAline}}\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "D2 setup - Find its id",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.collectionVariables.set('ticketD2', pm.response.json()[0].id);"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/between?start={{d2Date}}&end={{d2Date}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "queue-tickets",
-                "between"
-              ],
-              "query": [
-                {
-                  "key": "start",
-                  "value": "{{d2Date}}"
-                },
-                {
-                  "key": "end",
-                  "value": "{{d2Date}}"
-                }
-              ]
-            }
-          }
+          ]
         },
         {
           "name": "D2 - WAITING to SERVED (400)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 400', function () {",
-                  "    pm.response.to.have.status(400);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"Cannot change status from WAITING to SERVED\");",
-                  "});"
-                ]
-              }
-            }
-          ],
           "request": {
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/{{ticketD2}}/status?status=SERVED",
+              "raw": "{{baseUrl}}/api/queue-tickets/{{d1TicketId}}/status?status=SERVED",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "queue-tickets",
-                "{{ticketD2}}",
+                "{{d1TicketId}}",
                 "status"
               ],
               "query": [
@@ -2513,38 +2377,34 @@
                 }
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Cannot change status from WAITING to SERVED\"); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "D2 - WAITING to CALLED (200)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"Queue ticket status updated successfully\");",
-                  "});"
-                ]
-              }
-            }
-          ],
           "request": {
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/{{ticketD2}}/status?status=CALLED",
+              "raw": "{{baseUrl}}/api/queue-tickets/{{d1TicketId}}/status?status=CALLED",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "queue-tickets",
-                "{{ticketD2}}",
+                "{{d1TicketId}}",
                 "status"
               ],
               "query": [
@@ -2554,38 +2414,34 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "D2 - CALLED to WAITING (400)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 400', function () {",
-                  "    pm.response.to.have.status(400);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"Cannot change status from CALLED to WAITING\");",
-                  "});"
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Queue ticket status updated successfully\"); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D2 - CALLED to WAITING (400)",
           "request": {
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/{{ticketD2}}/status?status=WAITING",
+              "raw": "{{baseUrl}}/api/queue-tickets/{{d1TicketId}}/status?status=WAITING",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "queue-tickets",
-                "{{ticketD2}}",
+                "{{d1TicketId}}",
                 "status"
               ],
               "query": [
@@ -2595,38 +2451,34 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "D2 - CALLED to SERVED (200)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"Queue ticket status updated successfully\");",
-                  "});"
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Cannot change status from CALLED to WAITING\"); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D2 - CALLED to SERVED (200)",
           "request": {
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/{{ticketD2}}/status?status=SERVED",
+              "raw": "{{baseUrl}}/api/queue-tickets/{{d1TicketId}}/status?status=SERVED",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "queue-tickets",
-                "{{ticketD2}}",
+                "{{d1TicketId}}",
                 "status"
               ],
               "query": [
@@ -2636,38 +2488,34 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "D2 - SERVED to WAITING (400)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 400', function () {",
-                  "    pm.response.to.have.status(400);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"Cannot change status from SERVED to WAITING\");",
-                  "});"
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Queue ticket status updated successfully\"); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D2 - SERVED to WAITING (400)",
           "request": {
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/{{ticketD2}}/status?status=WAITING",
+              "raw": "{{baseUrl}}/api/queue-tickets/{{d1TicketId}}/status?status=WAITING",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "queue-tickets",
-                "{{ticketD2}}",
+                "{{d1TicketId}}",
                 "status"
               ],
               "query": [
@@ -2677,38 +2525,34 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "D2 - Unknown id (404)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 404', function () {",
-                  "    pm.response.to.have.status(404);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"The queue ticket with that id does not exist\");",
-                  "});"
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Cannot change status from SERVED to WAITING\"); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D2 - Unknown id (404)",
           "request": {
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/99999999-9999-9999-9999-999999999999/status?status=CALLED",
+              "raw": "{{baseUrl}}/api/queue-tickets/{{unknownId}}/status?status=CALLED",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "queue-tickets",
-                "99999999-9999-9999-9999-999999999999",
+                "{{unknownId}}",
                 "status"
               ],
               "query": [
@@ -2718,26 +2562,22 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "D2 - PUT update must not change status",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"Queue ticket updated successfully\");",
-                  "});"
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The queue ticket with that id does not exist\"); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D2 - PUT update does not change status (200)",
           "request": {
             "method": "PUT",
             "header": [
@@ -2747,7 +2587,7 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/update/{{ticketD2}}",
+              "raw": "{{baseUrl}}/api/queue-tickets/update/{{d1TicketId}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -2755,264 +2595,237 @@
                 "api",
                 "queue-tickets",
                 "update",
-                "{{ticketD2}}"
+                "{{d1TicketId}}"
               ]
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"ticketDate\": \"{{d2Date}}\",\n  \"status\": \"WAITING\",\n  \"ticketNumber\": 903,\n  \"customer\": {\n    \"id\": \"{{dCustomer}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{dAline}}\"\n  }\n}",
+              "raw": "{\n  \"ticketDate\": \"{{d1Date}}\",\n  \"ticketNumber\": 901,\n  \"customer\": {\n    \"id\": \"{{cust5}}\"\n  },\n  \"agent\": {\n    \"id\": \"{{agent3}}\"\n  },\n  \"status\": \"WAITING\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             }
-          }
-        },
-        {
-          "name": "D2 - Status is still SERVED",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Status is still SERVED', function () {",
-                  "    pm.expect(pm.response.json().status).to.eql('SERVED');",
-                  "});"
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Queue ticket updated successfully\"); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D2 - Status is still SERVED",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/queue-tickets/{{ticketD2}}",
+              "raw": "{{baseUrl}}/api/queue-tickets/{{d1TicketId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "queue-tickets",
-                "{{ticketD2}}"
+                "{{d1TicketId}}"
               ]
             }
-          }
-        },
-        {
-          "name": "D3 - Add service type to agent (200)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"Service type added to the agent\");",
-                  "});"
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Status is still SERVED', function () { pm.expect(pm.response.json().status).to.eql('SERVED'); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D3 - Add Complaints to Aline (200)",
           "request": {
             "method": "PUT",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/agents/{{dAline}}/service-types/{{dAccountOpening}}",
+              "raw": "{{baseUrl}}/api/agents/{{agent2}}/service-types/{{st3}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "agents",
-                "{{dAline}}",
+                "{{agent2}}",
                 "service-types",
-                "{{dAccountOpening}}"
+                "{{st3}}"
               ]
             }
-          }
-        },
-        {
-          "name": "D3 - Agent already has it (409)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 409', function () {",
-                  "    pm.response.to.have.status(409);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"The agent already has that service type\");",
-                  "});"
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Service type added to the agent\"); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D3 - Aline already has it (409)",
           "request": {
             "method": "PUT",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/agents/{{dAline}}/service-types/{{dAccountOpening}}",
+              "raw": "{{baseUrl}}/api/agents/{{agent2}}/service-types/{{st3}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "agents",
-                "{{dAline}}",
+                "{{agent2}}",
                 "service-types",
-                "{{dAccountOpening}}"
+                "{{st3}}"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 409', function () { pm.response.to.have.status(409); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The agent already has that service type\"); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "D3 - Unknown agent (404)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 404', function () {",
-                  "    pm.response.to.have.status(404);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"The agent with that id does not exist\");",
-                  "});"
-                ]
-              }
-            }
-          ],
           "request": {
             "method": "PUT",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/agents/99999999-9999-9999-9999-999999999999/service-types/{{dAccountOpening}}",
+              "raw": "{{baseUrl}}/api/agents/{{unknownId}}/service-types/{{st3}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "agents",
-                "99999999-9999-9999-9999-999999999999",
+                "{{unknownId}}",
                 "service-types",
-                "{{dAccountOpening}}"
+                "{{st3}}"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The agent with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "D3 - Unknown service type (404)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 404', function () {",
-                  "    pm.response.to.have.status(404);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"That service type does not exist\");",
-                  "});"
-                ]
-              }
-            }
-          ],
           "request": {
             "method": "PUT",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/agents/{{dAline}}/service-types/99999999-9999-9999-9999-999999999999",
+              "raw": "{{baseUrl}}/api/agents/{{agent2}}/service-types/{{unknownId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "agents",
-                "{{dAline}}",
+                "{{agent2}}",
                 "service-types",
-                "99999999-9999-9999-9999-999999999999"
+                "{{unknownId}}"
               ]
             }
-          }
-        },
-        {
-          "name": "D3 - Check agent keeps old types",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Agent has Complaints and Account Opening', function () {",
-                  "    var names = pm.response.json().serviceTypes.map(function (s) { return s.name; });",
-                  "    pm.expect(names).to.include('Complaints');",
-                  "    pm.expect(names).to.include('Account Opening');",
-                  "});"
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"That service type does not exist\"); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D3 - Aline kept Account Opening and got Complaints",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/agents/{{dAline}}",
+              "raw": "{{baseUrl}}/api/agents/{{agent2}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "agents",
-                "{{dAline}}"
+                "{{agent2}}"
               ]
             }
-          }
-        },
-        {
-          "name": "D4 - Move Eric to counter 4 (200)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"Counter changed successfully\");",
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Two service types', function () {",
+                  "    var names = pm.response.json().serviceTypes.map(function (s) { return s.name; }).sort();",
+                  "    pm.expect(names).to.eql(['Account Opening', 'Complaints']);",
                   "});"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D4 - Move Eric to counter 4 (200)",
           "request": {
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/agents/{{dEric}}/counter?counterNumber=4",
+              "raw": "{{baseUrl}}/api/agents/{{agent3}}/counter?counterNumber=4",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "agents",
-                "{{dEric}}",
+                "{{agent3}}",
                 "counter"
               ],
               "query": [
@@ -3022,28 +2835,22 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "D4 - Counter 3 is now free (C2)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Counter 3 free, counter 4 taken', function () {",
-                  "    var numbers = pm.response.json().map(function (c) { return c.counterNumber; });",
-                  "    pm.expect(numbers).to.include(3);",
-                  "    pm.expect(numbers).to.not.include(4);",
-                  "});"
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Counter changed successfully\"); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D4 - Counter 3 is now free (C2)",
           "request": {
             "method": "GET",
             "header": [],
@@ -3058,79 +2865,38 @@
                 "free"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Counter 3 is free\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.eql(1);",
+                  "    pm.expect(list[0].counterNumber).to.eql(3);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "D4 - Counter taken by another agent (409)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 409', function () {",
-                  "    pm.response.to.have.status(409);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"That counter is taken by another agent\");",
-                  "});"
-                ]
-              }
-            }
-          ],
           "request": {
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/agents/{{dAline}}/counter?counterNumber=1",
+              "raw": "{{baseUrl}}/api/agents/{{agent1}}/counter?counterNumber=4",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "agents",
-                "{{dAline}}",
-                "counter"
-              ],
-              "query": [
-                {
-                  "key": "counterNumber",
-                  "value": "1"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "D4 - Unknown agent (404)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('Status is 404', function () {",
-                  "    pm.response.to.have.status(404);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"The agent with that id does not exist\");",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/agents/99999999-9999-9999-9999-999999999999/counter?counterNumber=4",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "agents",
-                "99999999-9999-9999-9999-999999999999",
+                "{{agent1}}",
                 "counter"
               ],
               "query": [
@@ -3140,38 +2906,71 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "D4 - Unknown counter (404)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 404', function () {",
-                  "    pm.response.to.have.status(404);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"The counter with that counterNumber does not exist\");",
-                  "});"
+                  "pm.test('Status is 409', function () { pm.response.to.have.status(409); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"That counter is taken by another agent\"); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D4 - Unknown agent (404)",
           "request": {
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/agents/{{dEric}}/counter?counterNumber=99",
+              "raw": "{{baseUrl}}/api/agents/{{unknownId}}/counter?counterNumber=4",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "agents",
-                "{{dEric}}",
+                "{{unknownId}}",
+                "counter"
+              ],
+              "query": [
+                {
+                  "key": "counterNumber",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The agent with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "D4 - Unknown counter (404)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents/{{agent3}}/counter?counterNumber=99",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents",
+                "{{agent3}}",
                 "counter"
               ],
               "query": [
@@ -3181,38 +2980,34 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "D4 - Move Eric back to counter 3 (200)",
+          },
           "event": [
             {
               "listen": "test",
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('Message is correct', function () {",
-                  "    pm.expect(pm.response.text()).to.eql(\"Counter changed successfully\");",
-                  "});"
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The counter with that counterNumber does not exist\"); });"
                 ]
               }
             }
-          ],
+          ]
+        },
+        {
+          "name": "D4 - Move Eric back to counter 3 (200)",
           "request": {
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/agents/{{dEric}}/counter?counterNumber=3",
+              "raw": "{{baseUrl}}/api/agents/{{agent3}}/counter?counterNumber=3",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "agents",
-                "{{dEric}}",
+                "{{agent3}}",
                 "counter"
               ],
               "query": [
@@ -3222,15 +3017,375 @@
                 }
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Counter changed successfully\"); });"
+                ]
+              }
+            }
+          ]
         }
       ]
-    }
-  ],
-  "variable": [
+    },
     {
-      "key": "baseUrl",
-      "value": "http://localhost:8080"
+      "name": "Part E",
+      "item": [
+        {
+          "name": "E1 - Write a service note (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-notes/save?queueTicketId={{ticket2}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-notes",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "queueTicketId",
+                  "value": "{{ticket2}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serviceName\": \"Bill Payment\",\n  \"remarks\": \"Water bill paid in full\",\n  \"durationMinutes\": 6\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Service note saved successfully\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E1 - Ticket is not SERVED (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-notes/save?queueTicketId={{ticket5}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-notes",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "queueTicketId",
+                  "value": "{{ticket5}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serviceName\": \"Bill Payment\",\n  \"remarks\": \"Water bill paid in full\",\n  \"durationMinutes\": 6\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Service notes are only for SERVED queue tickets\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E1 - Unknown ticket (404)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-notes/save?queueTicketId={{unknownId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-notes",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "queueTicketId",
+                  "value": "{{unknownId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serviceName\": \"Bill Payment\",\n  \"remarks\": \"Water bill paid in full\",\n  \"durationMinutes\": 6\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The queue ticket with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E2 - Service notes of Diane (newest first)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-notes/customer/{{dianeNationalId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-notes",
+                "customer",
+                "{{dianeNationalId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"At least 2 notes, newest recordedDate first\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.at.least(2);",
+                  "    for (var i = 1; i < list.length; i++) { pm.expect(list[i - 1].recordedDate >= list[i].recordedDate).to.be.true; }",
+                  "    pm.expect(list[0].queueTicket.customer.nationalId).to.eql('1199780012345678');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E2 - Service notes of Grace (keeps note id)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-notes/customer/{{graceNationalId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-notes",
+                "customer",
+                "{{graceNationalId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Grace has the note written in E1\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.at.least(1);",
+                  "    pm.expect(list[0].remarks).to.eql('Water bill paid in full');",
+                  "    pm.collectionVariables.set('noteId', list[0].id);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E2 - Customer without notes (empty list)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-notes/customer/{{patrickNationalId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-notes",
+                "customer",
+                "{{patrickNationalId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Empty list\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.eql(0);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E3 - Delete service note (200)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-notes/delete/{{noteId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-notes",
+                "delete",
+                "{{noteId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"Service note deleted successfully\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E3 - Delete service note again (404)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/service-notes/delete/{{noteId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "service-notes",
+                "delete",
+                "{{noteId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"The service note with that id does not exist\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E3 - Delete ticket that has notes (409)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/delete/{{ticket1}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "delete",
+                "{{ticket1}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 409', function () { pm.response.to.have.status(409); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"That queue ticket has service notes, delete them first\"); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

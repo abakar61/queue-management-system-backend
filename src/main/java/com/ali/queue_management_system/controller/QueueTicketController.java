@@ -82,6 +82,10 @@ public class QueueTicketController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
         }
 
+        if (message.equals("That queue ticket has service notes, delete them first")) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+        }
+
         return ResponseEntity.ok(message);
     }
 

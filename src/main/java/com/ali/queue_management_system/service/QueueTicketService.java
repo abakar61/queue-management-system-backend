@@ -3,6 +3,7 @@ package com.ali.queue_management_system.service;
 import com.ali.queue_management_system.model.QueueTicket;
 import com.ali.queue_management_system.model.TicketStatus;
 import com.ali.queue_management_system.repository.QueueTicketRepository;
+import com.ali.queue_management_system.repository.ServiceNoteRepository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,9 @@ public class QueueTicketService {
 
     @Autowired
     private QueueTicketRepository queueTicketRepository;
+
+    @Autowired
+    private ServiceNoteRepository serviceNoteRepository;
 
     public String save(QueueTicket queueTicket) {
         if (queueTicket.getTicketDate().isBefore(LocalDate.now())) {
@@ -100,7 +104,13 @@ public class QueueTicketService {
             return "The queue ticket with that id does not exist";
         }
 
-        queueTicketRepository.delete(optional.get());
+        QueueTicket queueTicket = optional.get();
+
+        if (serviceNoteRepository.existsByQueueTicket(queueTicket)) {
+            return "That queue ticket has service notes, delete them first";
+        }
+
+        queueTicketRepository.delete(queueTicket);
 
         return "Queue ticket deleted successfully";
     }
