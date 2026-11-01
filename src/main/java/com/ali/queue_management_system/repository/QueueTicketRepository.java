@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface QueueTicketRepository extends JpaRepository<QueueTicket, UUID> {
 
@@ -15,4 +18,15 @@ public interface QueueTicketRepository extends JpaRepository<QueueTicket, UUID> 
     List<QueueTicket> findByTicketDateBetweenOrderByTicketDateAsc(LocalDate start, LocalDate end);
 
     boolean existsByAgentAndTicketDateAndStatusNot(Agent agent, LocalDate ticketDate, TicketStatus status);
+
+    @Query("SELECT t.status, COUNT(t) FROM QueueTicket t GROUP BY t.status")
+    List<Object[]> countTicketsByStatus();
+
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE QueueTicket t SET t.status = :newStatus WHERE t.agent.id = :agentId AND t.ticketDate = :ticketDate AND t.status <> :keepStatus")
+    int cancelTicketsOfAgentOnDate(
+            @Param("agentId") UUID agentId,
+            @Param("ticketDate") LocalDate ticketDate,
+            @Param("newStatus") TicketStatus newStatus,
+            @Param("keepStatus") TicketStatus keepStatus);
 }

@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class QueueTicketService {
@@ -121,5 +122,17 @@ public class QueueTicketService {
 
     public List<QueueTicket> getBetween(LocalDate start, LocalDate end) {
         return queueTicketRepository.findByTicketDateBetweenOrderByTicketDateAsc(start, end);
+    }
+
+    public List<Object[]> getStatsByStatus() {
+        return queueTicketRepository.countTicketsByStatus();
+    }
+
+    @Transactional
+    public String cancelDay(UUID agentId, LocalDate date) {
+        int count = queueTicketRepository.cancelTicketsOfAgentOnDate(
+                agentId, date, TicketStatus.SKIPPED, TicketStatus.SERVED);
+
+        return count + " queue tickets cancelled";
     }
 }

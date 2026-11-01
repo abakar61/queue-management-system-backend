@@ -3386,6 +3386,158 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Part F",
+      "item": [
+        {
+          "name": "F1 - Queue tickets per status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/stats/by-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "stats",
+                "by-status"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"One row per status with a count above zero\", function () {",
+                  "    var list = pm.response.json();",
+                  "    pm.expect(list.length).to.be.above(0);",
+                  "    var names = list.map(function (row) { return row[0]; });",
+                  "    pm.expect(new Set(names).size).to.eql(names.length);",
+                  "    list.forEach(function (row) { pm.expect(row.length).to.eql(2); pm.expect(row[1]).to.be.above(0); });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "F2 - Agent is absent (Jean on 2026-10-20)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/cancel-day?agentId={{agent1}}&date=2026-10-20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "cancel-day"
+              ],
+              "query": [
+                {
+                  "key": "agentId",
+                  "value": "{{agent1}}"
+                },
+                {
+                  "key": "date",
+                  "value": "2026-10-20"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"2 queue tickets cancelled\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "F2 - Ticket 3 is now SKIPPED",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/{{ticket3}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "{{ticket3}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Status is SKIPPED', function () { pm.expect(pm.response.json().status).to.eql('SKIPPED'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "F2 - Day without tickets (0 cancelled)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue-tickets/cancel-day?agentId={{agent1}}&date=2026-12-31",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "queue-tickets",
+                "cancel-day"
+              ],
+              "query": [
+                {
+                  "key": "agentId",
+                  "value": "{{agent1}}"
+                },
+                {
+                  "key": "date",
+                  "value": "2026-12-31"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Message is correct', function () { pm.expect(pm.response.text()).to.eql(\"0 queue tickets cancelled\"); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

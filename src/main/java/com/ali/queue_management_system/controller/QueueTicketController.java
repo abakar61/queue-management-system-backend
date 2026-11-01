@@ -39,6 +39,17 @@ public class QueueTicketController {
         return ResponseEntity.ok(queueTicketService.getAll());
     }
 
+    @GetMapping("/stats/by-status")
+    public ResponseEntity<List<Object[]>> getStatsByStatus() {
+        return ResponseEntity.ok(queueTicketService.getStatsByStatus());
+    }
+
+    @PatchMapping("/cancel-day")
+    public ResponseEntity<String> cancelDay(@RequestParam UUID agentId, @RequestParam String date) {
+        LocalDate ticketDate = LocalDate.parse(date);
+        return ResponseEntity.ok(queueTicketService.cancelDay(agentId, ticketDate));
+    }
+
     @GetMapping("/by-status")
     public ResponseEntity<List<QueueTicket>> getByStatus(@RequestParam TicketStatus status) {
         return ResponseEntity.ok(queueTicketService.getByStatus(status));
